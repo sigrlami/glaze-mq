@@ -1,0 +1,6 @@
+[package]
+name = "glazemq-server"
+version = "0.1.0"
+authors = ["Sergey Bushnyak <sergey.bushnyak@sigrlami.eu>"]
+
+[dependencies]
