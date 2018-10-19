@@ -1,6 +1,9 @@
 # GlazeMQ
 
- Multi-protocol messaging broker
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
+![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
+
+ Multi-protocol messaging broker - WIP - research project
 
  | Name     | Type    | Description
  |----------|---------|------------------------------------------------
@@ -10,5 +13,3 @@
  | `mqtt`   | plugin  | pure Rust implementation of MQTT protocol
  | `ampq`   | plugin  | pure Rust implementation of AMPQ protocol
  | `stomp`  | plugin  | pure Rust implementation of STOMP protocol
- 
- 
