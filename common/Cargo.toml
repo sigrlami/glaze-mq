@@ -2,5 +2,11 @@
 name = "glazemq-common"
 version = "0.1.0"
 authors = ["Sergey Bushnyak <sergey.bushnyak@sigrlami.eu>"]
+description = ""
+readme = "README.md"
+repository = "https://github.com/sigrlami/glaze-mq"
 
 [dependencies]
+serde = "1.0"
+serde_derive = "1.0"
+string_cache = "0.7.1"
