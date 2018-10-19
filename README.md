@@ -13,3 +13,16 @@
  | `mqtt`   | plugin  | pure Rust implementation of MQTT protocol
  | `ampq`   | plugin  | pure Rust implementation of AMPQ protocol
  | `stomp`  | plugin  | pure Rust implementation of STOMP protocol
+
+## Goals
+
+- [ ] Protocol agnostic server
+- [ ] MQTT implementation
+- [ ] STOMP implementation
+- [ ] AMQP implementation
+- [ ] Multiple Queues
+- [ ] Multiple Channels per single Queue
+- [ ] Crash resistance
+- [ ] Retention periods, soft/hard
+- [ ] Retention sizes, soft/hard
+- [ ] Channel seek by timestamp, id, sender, receiver
