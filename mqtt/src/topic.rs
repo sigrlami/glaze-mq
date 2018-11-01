@@ -3,6 +3,7 @@ use {Error, Result};
 
 const TOPIC_PATH_DELIMITER: char = '/';
 
+#[derive(Debug, Clone)]
 use self::Topic::{
     Blank,
     System,
@@ -65,4 +66,12 @@ impl Topic {
             }
         }
     }
+}
+
+#[derive(Debug, Clone)]
+pub struct TopicPath {
+    pub path: String,
+    // Should be false for Topic Name
+    pub wildcards: bool,
+    topics: Vec<Topic>
 }
