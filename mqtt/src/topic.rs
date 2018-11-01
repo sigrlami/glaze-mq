@@ -21,3 +21,48 @@ impl Into<String> for Topic {
         }
     }
 }
+
+impl Topic {
+    pub fn validate(topic: &str) -> bool {
+        match topic {
+            "+" | "#" => true,
+            _ => !(topic.contains("+") || topic.contains("#"))
+        }
+    }
+
+    pub fn fit(&self, other: &Topic) -> bool {
+        match *self {
+	    Blank => {
+                match *other {
+                    Blank | SingleWildcard | MultiWildcard => true,
+                    _ => false
+                }
+			},
+	                System(ref str) => {
+                match *other {
+                    System(ref s) => str == s,
+                    _ => false
+                }
+            },
+            Normal(ref str) => {
+                match *other {
+                    Normal(ref s) => str == s,
+                    SingleWildcard | MultiWildcard => true,
+                    _ => false
+                }
+            },
+            SingleWildcard => {
+                match *other {
+                    System(_) => false,
+                    _ => true
+                }
+            },
+            MultiWildcard => {
+                match *other {
+                    System(_) => false,
+                    _ => true
+                }
+            }
+        }
+    }
+}
