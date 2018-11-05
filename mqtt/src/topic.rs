@@ -143,3 +143,60 @@ impl TopicPath {
         })
     }
 }
+
+
+impl IntoIterator for TopicPath {
+    type Item = Topic;
+    type IntoIter = IntoIter<Topic>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.topics.into_iter()
+    }
+}
+
+impl<'a> From<&'a str> for TopicPath {
+    fn from(str: &'a str) -> TopicPath {
+        Self::from_str(str).unwrap()
+    }
+}
+
+impl From<String> for TopicPath {
+    fn from(path: String) -> TopicPath {
+        Self::from_str(path).unwrap()
+    }
+}
+
+impl Into<String> for TopicPath {
+    fn into(self) -> String {
+        self.path
+    }
+}
+
+pub trait ToTopicPath {
+    fn to_topic_path(&self) -> Result<TopicPath>;
+
+    fn to_topic_name(&self) -> Result<TopicPath> {
+        let topic_name = try!(self.to_topic_path());
+        match topic_name.wildcards {
+            false => Ok(topic_name),
+            true => Err(Error::TopicNameMustNotContainWildcard)
+        }
+    }
+}
+
+impl ToTopicPath for TopicPath {
+    fn to_topic_path(&self) -> Result<TopicPath> {
+        Ok(self.clone())
+    }
+}
+
+impl ToTopicPath for String {
+    fn to_topic_path(&self) -> Result<TopicPath> {
+        TopicPath::from_str(self.clone())
+    }
+}
+
+impl<'a> ToTopicPath for &'a str {
+    fn to_topic_path(&self) -> Result<TopicPath> {
+        TopicPath::from_str(*self)
+    }
+}
