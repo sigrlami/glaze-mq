@@ -75,3 +75,71 @@ pub struct TopicPath {
     pub wildcards: bool,
     topics: Vec<Topic>
 }
+
+impl TopicPath {
+    pub fn path(&self) -> String {
+        self.path.clone()
+    }
+
+    pub fn get(&self, index: usize) -> Option<&Topic> {
+        self.topics.get(index)
+    }
+
+    pub fn get_mut(&mut self, index: usize) -> Option<&mut Topic> {
+        self.topics.get_mut(index)
+    }
+
+    pub fn len(&self) -> usize {
+        self.topics.len()
+    }
+
+    pub fn is_final(&self, index: usize) -> bool {
+        let len = self.topics.len();
+        len == 0 || len-1 == index
+    }
+
+    pub fn is_multi(&self, index: usize) -> bool {
+        match self.topics.get(index) {
+            Some(topic) => *topic == Topic::MultiWildcard,
+            None => false
+        }
+    }
+
+    pub fn from_str<T: AsRef<str>>(path: T) -> Result<TopicPath> {
+        let mut valid = true;
+        let topics: Vec<Topic> = path.as_ref().split(TOPIC_PATH_DELIMITER).map( |topic| {
+            match topic {
+                "+" => Topic::SingleWildcard,
+                "#" => Topic::MultiWildcard,
+                "" => Topic::Blank,
+                _ => {
+                    if !Topic::validate(topic) {
+                        valid = false;
+                    }
+                    if topic.chars().nth(0) == Some('$') {
+                        Topic::System(String::from(topic))
+                    } else {
+                        Topic::Normal(String::from(topic))
+                    }
+                }
+            }
+        }).collect();
+
+        if !valid {
+            return Err(Error::InvalidTopicPath);
+        }
+        // check for wildcards
+        let wildcards = topics.iter().any(|topic| {
+            match *topic {
+                Topic::SingleWildcard | Topic::MultiWildcard => true,
+                _ => false
+            }
+        });
+
+        Ok(TopicPath {
+            path: String::from(path.as_ref()),
+            topics: topics,
+            wildcards: wildcards
+        })
+    }
+}
