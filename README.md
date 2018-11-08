@@ -1,4 +1,5 @@
 # GlazeMQ - multi-protocol pub/sub broker
+![logo](./docs/images/glaze-logo.png)
 
  Multi-protocol messaging broker for IoT, 5G-and-Beyond networks with emphasis on scalability.
 
@@ -15,7 +16,7 @@
 
 ## Rationale
 
-Modern broker exchanges lack perfomance features that allow to scale messaging capabilities according to changes in the traffic of IoT or 5G environments. Contrary to 4G networks that use packet system for burst messaging, exponential increase in IoT devices which is already reaching 1B online devices, sharing data 24/7 between each other and other monitoring system. It's expected that within 5 years we will see further increase in number of device which can bring online up to 5-6 billion devices. In addition to that deployment of 5G networks throughout the world creates absolutely novel environment for messaging which is more distributed and requires more capable system to serve such demand.
+Modern broker exchanges lack performance features that allow them to scale messaging capabilities according to changes in the traffic of IoT or 5G environments. Contrary to 4G networks that use packet systems for burst messaging, exponential increase in IoT devices which is already reaching 1B online devices, sharing data 24/7 between each other and other monitoring systems. It's expected that within 5 years we will see a further increase in the number of devices which can bring online up to 5-6 billion devices. In addition to that deployment of 5G networks throughout the world creates an novel environment for messaging which is more distributed and requires a more capable system to serve such demand.
 
 ## Roadmap
 
